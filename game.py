@@ -77,7 +77,8 @@ class Game:
             print('nice')
         #this should probably be in another function but works here for now
         # print('enter to continue')
-        input()
+        # input()
+        time.sleep(1)
     def play(self):
         self._set_player_num()
         self._set_player_hands()
@@ -108,17 +109,30 @@ class Game:
                 print(curr_card.string())
                 self._handle_checker(result)
         #^^THIS IS THE PART OF THE GAME WHERE EVERYONE GETS THEIR HAND NOW WE PLAY
-        for player_idx in range(0, self._num_players):
-            print(self._hands[player_idx].string())
         curr_round = 1
         for i in range(0,3):
             curr_card = self._deck.draw()
-            print(curr_card.string())
+            for player_idx in range(0, self._num_players):
+                print(self._hands[player_idx].string())
+            #maybe add another method for this
+            print('current card:', curr_card.string(), '\nwould anyone like to play their card?\nNone: (0)')
+            player_buttons = ''
+            for player in range(0, self._num_players):
+                player_buttons += self._hands[player].get_player() + ': (' + str(player + 1) + ')\n'
             try:
-                input('would anyone like to play their card')
+                player_card_down = input(player_buttons) - 1 #adjust for players indexing at 0 but buttons start at 1
             except ValueError:
                 print('pass')
 
+
+
+    def _verify_play_card(self, curr_card: Card, player_idx: int) -> bool:
+        hand = self._hands[player_idx]
+        cards = hand.get_cards()
+        nums = []
+        for card in cards:
+            nums.append(card.rank)
+        return curr_card.rank in nums
 
 
 
