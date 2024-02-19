@@ -135,7 +135,7 @@ class Game:
             for player in range(0, self._num_players):
                 player_buttons += self._hands[player].get_player() + ': (' + str(player + 1) + ')\n'
             try:
-                player_card_down = input(player_buttons) - 1 #adjust for players indexing at 0 but buttons start at 1
+                player_card_down = int(input(player_buttons)) - 1 #adjust for players indexing at 0 but buttons start at 1
             except ValueError:
                 print('pass')
 
