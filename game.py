@@ -74,7 +74,7 @@ class Game:
                 player = int(input())
                 if player < 1 or player > self._num_players:
                     print(f'must be a number between 1 and {self._num_players}')
-                return int
+                return player - 1 #adjust for index and buttons
             except ValueError:
                 print('input must be an integer')
 
@@ -137,7 +137,14 @@ class Game:
             #print the selection button for each player and their name
             for player in range(0, self._num_players):
                 player_buttons += self._hands[player].get_player() + ': (' + str(player + 1) + ')\n'
+            print(player_buttons)
             ##PROMT FOR PLAYERS TO PLAY THEIR CARD
+            card_player = self._take_card_play()
+            if self._verify_play_card(curr_card.rank, card_player):
+                play_hand = self._hands[card_player]
+                play_hand.play_card(curr_card)
+                print(f'{curr_card.string()} played by {play_hand.get_player()}')
+
 
 
 if __name__ == '__main__':
