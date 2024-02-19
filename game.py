@@ -67,8 +67,23 @@ class Game:
                 print('guess must be a number')
 
                 #TODO: fix no copy pase for first 3
+    #scan for which user is playing a card, verify the input, call play card to modify the hand, return updated hand?
+    #might be a better way to split this
+    def _take_card_play(self, hand: Hand, curr_card: Card): #calling update hand should update the object regardless of returning
+        target = curr_card.rank #only the # of the card matters for this round
+        while True:
+            try:
+                pass
+            except ValueError:
+                print('input must be an integer')
 
-
+    def _verify_play_card(self, target: int, player_idx: int) -> bool:
+        hand = self._hands[player_idx]
+        cards = hand.get_cards()
+        nums = []
+        for card in cards:
+            nums.append(card.rank)
+        return target in nums
 
     def _handle_checker(self, result: bool):
         if result is False:
@@ -124,15 +139,6 @@ class Game:
             except ValueError:
                 print('pass')
 
-
-
-    def _verify_play_card(self, curr_card: Card, player_idx: int) -> bool:
-        hand = self._hands[player_idx]
-        cards = hand.get_cards()
-        nums = []
-        for card in cards:
-            nums.append(card.rank)
-        return curr_card.rank in nums
 
 
 
