@@ -67,13 +67,14 @@ class Game:
                 print('guess must be a number')
 
                 #TODO: fix no copy pase for first 3
-    #scan for which user is playing a card, verify the input, call play card to modify the hand, return updated hand?
-    #might be a better way to split this
-    def _take_card_play(self, hand: Hand, curr_card: Card): #calling update hand should update the object regardless of returning
-        target = curr_card.rank #only the # of the card matters for this round
+
+    def _take_card_play(self) -> int:
         while True:
             try:
-                pass
+                player = int(input())
+                if player < 1 or player > self._num_players:
+                    print(f'must be a number between 1 and {self._num_players}')
+                return int
             except ValueError:
                 print('input must be an integer')
 
@@ -127,19 +128,16 @@ class Game:
         curr_round = 1
         for i in range(0,3):
             curr_card = self._deck.draw()
+            #printe everyone's hand
             for player_idx in range(0, self._num_players):
                 print(self._hands[player_idx].string())
             #maybe add another method for this
             print('current card:', curr_card.string(), '\nwould anyone like to play their card?\nNone: (0)')
             player_buttons = ''
+            #print the selection button for each player and their name
             for player in range(0, self._num_players):
                 player_buttons += self._hands[player].get_player() + ': (' + str(player + 1) + ')\n'
-            try:
-                player_card_down = int(input(player_buttons)) - 1 #adjust for players indexing at 0 but buttons start at 1
-            except ValueError:
-                print('pass')
-
-
+            ##PROMT FOR PLAYERS TO PLAY THEIR CARD
 
 
 if __name__ == '__main__':
