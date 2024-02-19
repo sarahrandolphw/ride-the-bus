@@ -93,7 +93,7 @@ class Game:
         #this should probably be in another function but works here for now
         # print('enter to continue')
         # input()
-        time.sleep(1)
+        time.sleep(.5)
     def play(self):
         self._set_player_num()
         self._set_player_hands()
